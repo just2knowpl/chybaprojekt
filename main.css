@@ -25,6 +25,7 @@ body
     font-size: 18px;
     color: #efefef;
     display: block;
+    transition: 0.3s;
 }
 
 .sidenav a:hover {
@@ -38,7 +39,7 @@ body
     font-size: 36px;
     margin-left: 50px;
 }
-.closebtn { cursor: pointer; color: #efefef; margin-top: 12px; }
+.closebtn { cursor: pointer; color: #efefef; margin-top: 7px; }
 
 main {
 	margin: 0;
@@ -50,8 +51,6 @@ main {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-
-.navbar { height: 60px; }
 
 .navbar > h6 { color: #fff; }
 .arrow { margin: 0 0 5px 5px; color: #fff; }
