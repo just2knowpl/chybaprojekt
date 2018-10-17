@@ -38,6 +38,7 @@ function setEmail($mail) {
         echo "Podany mail został już wykorzystany. ";
         return null;
     }
+<<<<<<< HEAD
 }
 
 //checkery
@@ -46,11 +47,17 @@ function checkSession($session) {
     if(isset($session) && !empty($session) && ($session != null))
         return true;
     return false;
+=======
+>>>>>>> e6d651ef8093d67e56551cd57ba6ce480ce4a392
 }
-
 
 //finishery
 
+<<<<<<< HEAD
+//finishery
+
+=======
+>>>>>>> e6d651ef8093d67e56551cd57ba6ce480ce4a392
 function registerUser($usr,$pass,$mai) {
     if(!empty($usr) && !empty($pass) && !empty($mai) && $usr != null && $pass != null && $mai != null) {
         mysqli_query(dbConn(),"INSERT INTO users (nickname,password,email) VALUES('".$usr."','".$pass."','".$mai."');");
