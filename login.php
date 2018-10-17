@@ -23,6 +23,7 @@ if(checkSession(@$_SESSION['user'])) {
     
     <p><input type="submit" name='log' value="Zaloguj się"></p>
 </form>
+<p>Nie masz konta? <a href="register">Zarejestruj sie!</a></p>
 <?php
 if(isset($_REQUEST['log'])) {
     if(loginUser(mysqli_real_escape_string(dbConn(),$_REQUEST['login']),md5(mysqli_real_escape_string(dbConn(),$_REQUEST['password']))))

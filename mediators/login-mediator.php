@@ -42,13 +42,8 @@ function setEmail($mail) {
 
 //checkery
 
-function checkSession($session) {
-    if(isset($session) && !empty($session) && ($session != null))
-        return true;
-    return false;
-}
 
-//finishery
+
 
 //finishery
 
@@ -89,6 +84,6 @@ function loginUser($login,$password) {
         }
     }
 }
-
+    
 
 ?>

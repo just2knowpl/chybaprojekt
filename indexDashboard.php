@@ -1,8 +1,10 @@
 <?php
 include 'mediators/admin-dashboard-mediator.php';
-if(@$_SESSION['user'] == NULL)
+if(@!checkSession($_SESSION['user'])) {
     echo "Nie jesteś zalogowany. Nie masz prawa przeglądać tej strony"; 
-
+    echo "<a href='login'>Zaloguj sie</a>";
+    return;
+}
 ?>
 <!DOCTYPE html>
 <html lang="pl">

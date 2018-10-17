@@ -4,22 +4,6 @@
 */
 session_start();
 
-function setUser($nick) {
-    if(!empty($nick)) {
-        $_SESSION['user'] = $nick;
-        return true;
-    }
-    else
-        return false;
-}
-
-function getUser($user) {
-    if(isset($user)) 
-        return $user;
-    else 
-        return "tester";
-}
-
 function dbConn() {
     $dbuser = "root";
     $dbhost = "localhost";
@@ -30,5 +14,10 @@ function dbConn() {
         return $conn;
     }
         
+}
+function checkSession($session) {
+    if(isset($session) && !empty($session) && ($session != null))
+        return true;
+    return false;
 }
 ?>
