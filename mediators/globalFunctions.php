@@ -21,10 +21,10 @@ function getUser($user) {
 }
 
 function dbConn() {
-    $dbuser = "";
-    $dbhost = "";
+    $dbuser = "root";
+    $dbhost = "localhost";
     $dbpass = "";
-    $db = "";
+    $db = "projekt";
     $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $db);
     if($conn) {
         return $conn;
