@@ -63,16 +63,20 @@ include 'mediators/login-mediator.php';
 
 </header>
 <main>
+
+<div class="container">
+	<div class="content">
 	<div class="row">
-		
-		   <form action="" method="post">
+		<div class="col-75 mx-auto">
+		   <form action="" class="mx-auto mt-5" method="post">
 			
-			<p><input type="text" name="login" placeholder='Login' required></p>
-			<p><input type="password" name="password" placeholder='Hasło' required></p>
+			<p><input type="text" name="login" style="width: 300px;" placeholder='Login' required></p>
+			<p><input type="password" name="password" style="width: 300px;" placeholder='Hasło' required></p>
 			
-			<p><input type="submit" name='log' value="Zaloguj się"></p>
+			<p><input type="submit" name='log' value="Zaloguj się" class="login mx-auto"></p>
 		</form>
-		<p>Nie masz konta? <a href="register">Zarejestruj sie!</a></p>
+		<div class="w-100"></div>
+		<p class="register">Nie masz konta? <a href="register">Zarejestruj sie!</a></p>
 		<?php
 		if(isset($_REQUEST['log'])) {
 			if(loginUser(mysqli_real_escape_string(dbConn(),$_REQUEST['login']),md5(mysqli_real_escape_string(dbConn(),$_REQUEST['password'])))) {
@@ -87,9 +91,10 @@ include 'mediators/login-mediator.php';
 		}
 		?>
 		
-		<div>
 		</div>
 		</div>
+		</div>
+</div>
 </main>	
 <script src=""></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

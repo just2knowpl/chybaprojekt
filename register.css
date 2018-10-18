@@ -5,9 +5,15 @@ body
 	font-size: 18px;
 	margin: 0;
 	padding: 0;
+	width: 100%;
 }
 
 .container
+{
+	width: 100%;
+}
+
+.content
 {
 	border-radius: 10px;
 	margin-left: auto;
@@ -15,8 +21,9 @@ body
 	margin-bottom: 50px;
 	background-color: #efefef;
 	margin-top: 90px;
-	padding: 20px 0px 20px 50px;
-	height: 620px;
+	padding: 0px 0px 0px 0px;
+	height: 400px;
+	width: 500px;
 }
 
 .txt { margin: 10px 0 0 0; }
@@ -110,6 +117,7 @@ input[type=email]:focus
 	{
 		overflow-x: hidden;
 	}
+	
 	
 	.nick { padding-top: 15px; }
 	input[type=text],

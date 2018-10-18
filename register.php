@@ -74,9 +74,10 @@ include 'mediators/login-mediator.php';
 </header>	
 
 <main>
+<div class="container">
+	<div class="content">
 	<div class="row">
 		<div class="col-auto mx-auto">
-			<div class="container pt-5">
 				<form class="mb-5" action="" method="post">
 				<p class="txt nick">Nick:</p><input type="text" name='nick' placeholder="Nazwa użytkownika" required>
 				<p class="txt">Mail:</p><input type="email" name="mail" placeholder="Adres Email" required>
@@ -87,8 +88,9 @@ include 'mediators/login-mediator.php';
 				<p class="txt"><input type="submit" name='sub' value="Stwórz konto" required></p>
 				</form>
 			</div>	
-		</div>
 	</div>
+	</div>
+</div>	
 </main>	
 
 <?php
