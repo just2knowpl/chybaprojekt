@@ -2,8 +2,8 @@
 include 'mediators/zlecenia-mediator.php';
 
 if(!checkSession(@$_SESSION['user'])) {
-    echo "Użytkownik nie jest zalogowany. <a href='login.php'>Zaloguj się</a>";
-    $_SESSION['lastPage'] = basename(__FILE__, '.php');
+    echo "Użytkownik nie jest zalogowany. <a href='login'>Zaloguj się</a>";
+    $_SESSION['lastPage'] = basename(__FILE__);
     return;
 }
 
@@ -23,3 +23,6 @@ if(!checkSession(@$_SESSION['user'])) {
     <p><textarea name="opisZlecenia" placeholder="Opis zlecenia"></textarea></p>
     <input type="submit" value="opublikuj zlecenie">
 </form>
+<?php
+    
+?>

@@ -1,3 +1,10 @@
+<?php
+include 'mediators/login-mediator.php';
+
+    if(checkSession(@$_SESSION['user'])) {
+        exit(header("Location:index"));
+    }
+    ?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -10,10 +17,6 @@
 	
 	<meta http-equiv="X-Ua-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
-<?php
-include 'mediators/login-mediator.php';
-?>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
@@ -69,6 +72,7 @@ include 'mediators/login-mediator.php';
 </nav>
 
 </header>	
+
 <main>
 	<div class="row">
 		<div class="col-auto mx-auto">

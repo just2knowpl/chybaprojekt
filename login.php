@@ -64,21 +64,7 @@ include 'mediators/login-mediator.php';
 </header>
 <main>
 	<div class="row">
-		<div class="col-auto mx-auto">
-		<form style="display: <?php if(checkSession(@$_SESSION['user'])) echo "block;"; else echo "none;";?>" action="" method="post">
-		<input type="submit" name="destroy" value="wyloguj">
-		</form>
-		<?php
-			if(isset($_REQUEST['destroy'])) {
-				if(checkSession(@$_SESSION['user'])) {
-				session_destroy();
-				echo "<script>location.reload();</script>";
-				}
-			}
-		if(checkSession(@$_SESSION['user'])) {
-			exit(header("Location: index.php"));
-		}
-		?>
+		
 		   <form action="" method="post">
 			
 			<p><input type="text" name="login" placeholder='Login' required></p>
@@ -89,9 +75,15 @@ include 'mediators/login-mediator.php';
 		<p>Nie masz konta? <a href="register">Zarejestruj sie!</a></p>
 		<?php
 		if(isset($_REQUEST['log'])) {
-			if(loginUser(mysqli_real_escape_string(dbConn(),$_REQUEST['login']),md5(mysqli_real_escape_string(dbConn(),$_REQUEST['password']))))
-				echo "Przechodzę na stronę główną..";
-			echo "<script>location.reload();</script>";
+			if(loginUser(mysqli_real_escape_string(dbConn(),$_REQUEST['login']),md5(mysqli_real_escape_string(dbConn(),$_REQUEST['password'])))) {
+                if(isset( $_SESSION['lastPage'])) {
+                    exit(header("Location:". $_SESSION['lastPage']));
+                    session_unset("lastPage");
+                }
+            exit(header("Location:index"));
+            }
+				
+			
 		}
 		?>
 		
