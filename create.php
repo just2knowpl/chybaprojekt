@@ -1,3 +1,13 @@
+<?php 
+include 'mediators/zlecenia-mediator.php';
+
+if(!checkSession(@$_SESSION['user'])) {
+    echo "Użytkownik nie jest zalogowany. <a href='login.php'>Zaloguj się</a>";
+    $_SESSION['lastPage'] = basename(__FILE__, '.php');
+    return;
+}
+
+?>
 <h2>Tworzenie nowego zlecenia</h2>
 <form action="" method="post">
     <p><input type="text" name="zlecenieTytul" placeholder="Tytuł oferty"></p>

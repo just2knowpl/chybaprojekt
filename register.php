@@ -87,6 +87,14 @@ include 'mediators/login-mediator.php';
 	</div>
 </main>	
 
+<?php
+    if(isset($_REQUEST['sub'])) {     registerUser(setUsername($_REQUEST['nick']),setPassword($_REQUEST['pass'],$_REQUEST['pass2']),setEmail($_REQUEST['mail']));
+
+        
+    }
+?>
+
+
 <footer>
 
 	<div class="row">
@@ -107,19 +115,6 @@ include 'mediators/login-mediator.php';
 
 </footer>
 
-
-
-
-
-
-
-
-<?php
-    if(isset($_REQUEST['sub'])) {     registerUser(setUsername($_REQUEST['nick']),setPassword($_REQUEST['pass'],$_REQUEST['pass2']),setEmail($_REQUEST['mail']));
-
-        
-    }
-?>
 
 <script src=""></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

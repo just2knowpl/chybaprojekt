@@ -51,11 +51,11 @@ function registerUser($usr,$pass,$mai) {
     if(!empty($usr) && !empty($pass) && !empty($mai) && $usr != null && $pass != null && $mai != null) {
         mysqli_query(dbConn(),"INSERT INTO users (nickname,password,email) VALUES('".$usr."','".$pass."','".$mai."');");
 
-        echo "<br>dodano. Sprawdzanie..";
         //Sprawdzanie czy rekord został dodany prawidłowo
         $resCheck = mysqli_query(dbConn(),"SELECT * FROM users WHERE nickname = '".$usr."'");
         if(mysqli_num_rows($resCheck) != 0) {
-            echo "<br>dodano, sprawdzono";
+            echo "<br>Rejestracja przebiegła pomyślnie.. przechodzę do logowania";
+            exit(header("Location:login"));
             return true;
         }
         else {
