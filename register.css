@@ -19,12 +19,12 @@ body
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 50px;
-	background-color: #efefef;
-	margin-top: 90px;
+	margin-top: 40px;
 	padding: 0px 0px 0px 0px;
 	height: 400px;
-	width: 500px;
 }
+
+.form { margin-left: auto; margin-right: auto; }
 
 .txt { margin: 10px 0 0 0; }
 label { margin: 0; }
@@ -47,8 +47,9 @@ input[type=password]
 
 input[type=submit]
 {
-	width: 300px;
-	margin-right: 50px;
+	width: 250px;
+	margin-right: auto;
+	margin-left: auto;
 	background-color: #119977;
 	font-size:20px;
 	color: white;

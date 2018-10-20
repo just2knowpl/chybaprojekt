@@ -67,11 +67,11 @@ include 'mediators/login-mediator.php';
 <div class="container">
 	<div class="content">
 	<div class="row">
-		<div class="col-75 mx-auto">
+		<div class="col-auto mx-auto">
 		   <form action="" class="mx-auto mt-5" method="post">
 			
-			<p><input type="text" name="login" style="width: 300px;" placeholder='Login' required></p>
-			<p><input type="password" name="password" style="width: 300px;" placeholder='Hasło' required></p>
+			<p><input type="text" name="login" placeholder='Login' required></p>
+			<p><input type="password" name="password" placeholder='Hasło' required></p>
 			
 			<p><input type="submit" name='log' value="Zaloguj się" class="login mx-auto"></p>
 		</form>

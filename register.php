@@ -75,10 +75,10 @@ include 'mediators/login-mediator.php';
 
 <main>
 <div class="container">
-	<div class="content">
 	<div class="row">
 		<div class="col-auto mx-auto">
-				<form class="mb-5" action="" method="post">
+		<div class="content">
+				<form class="mb-5 form" action="" method="post">
 				<p class="txt nick">Nick:</p><input type="text" name='nick' placeholder="Nazwa użytkownika" required>
 				<p class="txt">Mail:</p><input type="email" name="mail" placeholder="Adres Email" required>
 				<p class="txt">Hasło:</p><input type="password" name="pass" placeholder="Hasło" required>
@@ -103,21 +103,7 @@ include 'mediators/login-mediator.php';
 
 <footer>
 
-	<div class="row">
-		<div class="col-auto mx-auto">
-			<h5 class="info">Informacje</h5>
-			<p>Lorem ipsum dolor sit amet, consectetur</p>
-			<p>Curabitur facilisis tortor et facilisis placerat</p>
-			<p>Fusce a tristique arcu, et fermentum nunc</p>
-			<p>Aliquam luctus mollis mauri</p>
-		</div>
-		<div class="col-auto mx-auto">
-			<a href=""><img class="img-fluid app" src="img/andoridapp.png" alt="AnroidApp" ></a>
-		</div>
-		<div class="col-auto mx-auto">
-			
-		</div>
-	</div>
+	
 
 </footer>
 
