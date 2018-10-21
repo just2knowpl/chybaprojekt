@@ -41,33 +41,19 @@ include 'mediators/login-mediator.php';
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Home </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+      
       <li class="nav-item">
         <a class="nav-link" href="#">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>
 
@@ -77,8 +63,8 @@ include 'mediators/login-mediator.php';
 <div class="container">
 	<div class="row">
 		<div class="col-auto mx-auto">
-		<div class="content">
-				<form class="mb-5 form" action="" method="post">
+			<div class="content">
+				<form class="mb-5 form_reg" action="" method="post">
 				<p class="txt nick">Nick:</p><input type="text" name='nick' placeholder="Nazwa użytkownika" required>
 				<p class="txt">Mail:</p><input type="email" name="mail" placeholder="Adres Email" required>
 				<p class="txt">Hasło:</p><input type="password" name="pass" placeholder="Hasło" required>
@@ -88,7 +74,7 @@ include 'mediators/login-mediator.php';
 				<p class="txt"><input type="submit" name='sub' value="Stwórz konto" required></p>
 				</form>
 			</div>	
-	</div>
+		</div>
 	</div>
 </div>	
 </main>	
@@ -102,9 +88,13 @@ include 'mediators/login-mediator.php';
 
 
 <footer>
-
-	
-
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 col-auto d-flex justify-content-center footer">
+				<p class="reserved">Wszelkie prawa zastrzeżone &copy;</p>
+			</div>
+		</div>
+	</div>
 </footer>
 
 
