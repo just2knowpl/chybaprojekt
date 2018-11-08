@@ -21,7 +21,10 @@ if(!checkSession(@$_SESSION['user'])) {
     <p><input type="text" name="czasWykonaniaOd" placeholder="Czas wykonania od.."> <!-- Walidacja - cyfry -->
     <input type="text" name="czasWykonaniaDo" placeholder="Czas wykonania do.."> dni</p>  <!-- Walidacja - cyfry -->
     <p><textarea name="opisZlecenia" placeholder="Opis zlecenia"></textarea></p>
+    <p>Regulamin jakiśtam<input type="checkbox" name="regulamin"></p>
+    <p>Wysyłaj informację dotyczące tego zgłoszenia na mojego maila. <input type="checkbox" name="infMailZlec"></p>
     <input type="submit" value="opublikuj zlecenie">
+    
 </form>
 <?php
     

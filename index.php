@@ -22,11 +22,11 @@ include "mediators/index-mediator.php";
 </head>
 <body>
 
-<?php include 'include/header_main_page.php'; ?>
+<?php //include 'include/header_main_page.php'; ?>
 
 <h2>TUTAJ BĘDZIE STRONA GŁÓWNA DLA UŻYTKOWNIKA</h2> 
-<!--<div style="display: <?php if(checkSession(@$_SESSION['user'])) echo "none"; else echo "block";?>"><a href="register">Zarejestruj sie</a></div>
-<div style="display: <?php if(checkSession(@$_SESSION['user'])) echo "none"; else echo "block";?>"><a href="login">Zaloguj sie</a></div>-->
+<div style="display: <?php if(checkSession(@$_SESSION['user'])) echo "none"; else echo "block";?>"><a href="register">Zarejestruj sie</a></div>
+<div style="display: <?php if(checkSession(@$_SESSION['user'])) echo "none"; else echo "block";?>"><a href="login">Zaloguj sie</a></div>
 
 <form style="display: <?php if(checkSession(@$_SESSION['user'])) echo "block;"; else echo "none;";?>" action="" method="post">
 		<input type="submit" name="destroy" value="wyloguj">
@@ -39,8 +39,8 @@ include "mediators/index-mediator.php";
 				}
 			}
     ?>
-<!--<div><a href="oferty">Lista zleceń</a></div>
-<div><a href="create">Dodaj nową ofertę</a></div>-->
+<div><a href="oferty">Lista zleceń</a></div>
+<div><a href="create">Dodaj nową ofertę</a></div>
 
 
 

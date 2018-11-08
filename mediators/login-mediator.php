@@ -49,6 +49,7 @@ function setEmail($mail) {
 
 function registerUser($usr,$pass,$mai) {
     if(!empty($usr) && !empty($pass) && !empty($mai) && $usr != null && $pass != null && $mai != null) {
+        //sprawdzanie czy taka osoba juz istnieje w bazie
         mysqli_query(dbConn(),"INSERT INTO users (nickname,password,email) VALUES('".$usr."','".$pass."','".$mai."');");
 
         //Sprawdzanie czy rekord został dodany prawidłowo

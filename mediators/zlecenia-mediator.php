@@ -36,7 +36,7 @@ function setCzasWyk($czasOd,$czasDo) {
     }
             else 
         echo "Czas nie został podany prawidłowo.";
-    return null
+    return null;
 }
 function setOpis($opis) {
     if(isset($opis) && !empty($opis) && $opis != null)
@@ -45,15 +45,18 @@ function setOpis($opis) {
         echo "Opis nie został podany.";
     return null;
 }
-
-function potwierdzZlecenie() {
-    return true;
+    
+function potwierdzZlecenie($potwierdzenie) {
+    return $potwierdzenie;
 }
 
 
 function addZlecenie($tytul,$budzet,$waluta,$czasWyk,$opis,$potw) {
     if($tytul != null && $budzet != null && $waluta != null && $czasWyk != null && $opis != null && $potw != null) {
         echo "Danie podane prawidłowo.";
+        //sprawdzanie czy uzytkownik dodal juz zgloszenie o takim samym tytule, kwocie i czasie. Mikro zabbezpieczenie anty-spamowe.
+        
+        $query = mysqli_query(dbConn(),"SELECT ''");
     }
     else {
         echo "Błąd aplikacji.";
