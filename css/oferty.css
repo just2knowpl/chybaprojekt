@@ -1,0 +1,48 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.tabela-zlecen {
+    display: block;
+    margin: auto;
+    border: 1px solid black;
+    text-align: left;
+    max-width: 65%;
+    overflow: auto;
+}
+.row-main {
+    display: block;
+    background: #f5d897;
+    text-align: center;
+    
+}
+.row-main > div {
+    display: inline-flex;
+    justify-content: space-between;
+    text-align: center !important;
+    width: 150px;
+    padding: 5px;
+    margin-left: 10px;
+    overflow: auto;
+    
+}
+.wiersz {
+    display: block;
+}
+.wiersz > div {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 150px;
+    padding: 5px;
+    margin-left: 10px;
+    overflow: auto;
+    
+}
+.wiersz > .opis, .row-main > .opis {
+    width: 300px;
+    overflow: auto;
+    text-align: center;
+}
+
+

@@ -24,6 +24,8 @@ include "mediators/index-mediator.php";
 				}
 			}
     ?>
+<div><a href="oferty">Lista zleceń</a></div>
+<div><a href="create">Dodaj nową ofertę</a></div>
 
 </body>
 </html>

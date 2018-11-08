@@ -23,22 +23,41 @@ function setBudzet($budzetOd,$budzetDo) {
     }
 }
 function setWaluta($waluta) {
-    
+    if(isset($waluta) && !empty($waluta) && $waluta != null)
+        return mysqli_real_escape_string(dbConn(),$waluta);
+    else 
+        echo "Waluta nie może być pusta";
+    return null;
 }
 function setCzasWyk($czasOd,$czasDo) {
-    
+    if(isset($czasOd) && !empty($czasOd) && $czasOd != null && isset($czasDo) && !empty($czasDo) && $czasDo != null) {
+        $srCzas = ($czasOd + $czasDo) / 2;
+        return mysqli_real_escape_string(dbConn(),$srCzas);
+    }
+            else 
+        echo "Czas nie został podany prawidłowo.";
+    return null
 }
 function setOpis($opis) {
-    
+    if(isset($opis) && !empty($opis) && $opis != null)
+        return mysqli_real_escape_string(dbConn(),$opis);
+    else 
+        echo "Opis nie został podany.";
+    return null;
 }
 
 function potwierdzZlecenie() {
-    
+    return true;
 }
 
 
-function addZlecenie() {
-    
+function addZlecenie($tytul,$budzet,$waluta,$czasWyk,$opis,$potw) {
+    if($tytul != null && $budzet != null && $waluta != null && $czasWyk != null && $opis != null && $potw != null) {
+        echo "Danie podane prawidłowo.";
+    }
+    else {
+        echo "Błąd aplikacji.";
+    }
 }
 
 ?>

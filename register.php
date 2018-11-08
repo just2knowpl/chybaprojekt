@@ -33,7 +33,7 @@ include 'mediators/login-mediator.php';
 !* NIE RUSZAJ PHP'A-->
 <body>
 
-<?php incldue 'include/header.php'; ?>
+<?php include 'include/header.php'; ?>
 
 <main>
 <div class="container">
@@ -46,7 +46,7 @@ include 'mediators/login-mediator.php';
 				<p class="txt">Hasło:</p><input type="password" name="pass" placeholder="Hasło" required>
 				<p class="txt">Potwórz hasło:</p><input type="password" name="pass2" placeholder="Potwórz hasło" required>
 				<div class="w-100"></div>
-				<label><p class="txt chbox"><input type="checkbox" required>Wyrażam zgode na..   </p></label>
+				<label><p class="txt chbox"><input type="checkbox" required>Wyrażam zgode na oddanie wszystkich moich pieniędzy oraz dożywotnie przelewy na nasze konto bankowe w wysokości 34 tyś. złotych   </p></label>
 				<p class="txt"><input type="submit" name='sub' value="Stwórz konto" required></p>
 				</form>
 			</div>	

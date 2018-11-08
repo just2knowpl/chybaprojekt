@@ -2,7 +2,7 @@
 include 'mediators/zlecenia-mediator.php';
 
 if(!checkSession(@$_SESSION['user'])) {
-    echo "Użytkownik nie jest zalogowany. <a href='login'>Zaloguj się</a>";
+    echo "Aby dodać nową ofertę, musisz posiadać konto na naszym portalu. <a href='login'>Zaloguj się</a>";
     $_SESSION['lastPage'] = basename(__FILE__);
     return;
 }
@@ -13,7 +13,7 @@ if(!checkSession(@$_SESSION['user'])) {
     <p><input type="text" name="zlecenieTytul" placeholder="Tytuł oferty"></p>
     <p><input type="text" name="zlecenieBudzetOd" placeholder="Twój budżet od.."> <!-- Walidacja - cyfry -->
     <input type="text" name="zlecenieBudzetDo" placeholder="Twój budżet do.."></p> <!-- Walidacja - cyfry -->
-    <p>Waluta: <select>
+    <p>Waluta: <select name='waluta'>
         <option value="zl">zł</option>
         <option value="usd">$</option>
         <option value="eur">€</option>
