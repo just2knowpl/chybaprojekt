@@ -21,6 +21,7 @@ include 'mediators/login-mediator.php';
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="register.css" type="text/css">
+<link rel="stylesheet" href="main_page.css" type="text/css">
 
 </head>
 <!--TODO: Zrób walidacje w js

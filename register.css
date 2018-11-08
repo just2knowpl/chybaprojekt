@@ -91,6 +91,7 @@ input[type=email]:focus
 .navbar > a
 {
 	font-size: 22px;
+	color: #fff !important;
 }
 
 .register > a { text-decoration: none; color:#082b08  }
@@ -99,10 +100,8 @@ input[type=email]:focus
 .nav-link
 {
 	font-size: 18px;
-	color: #fff!important;
+	color: #fff !important;
 }
-
-.nav-link:hover { transform: scale(1.05); transform: rotateY(360deg); transition: 1.5s; }
 
 .footer
 {
@@ -115,6 +114,7 @@ input[type=email]:focus
 {
 	height: 30px;
 	line-height: 45px;
+	color: #fff;
 }
 
 
