@@ -54,9 +54,22 @@ function potwierdzZlecenie($potwierdzenie) {
 function addZlecenie($tytul,$budzet,$waluta,$czasWyk,$opis,$potw) {
     if($tytul != null && $budzet != null && $waluta != null && $czasWyk != null && $opis != null && $potw != null) {
         echo "Danie podane prawidłowo.";
-        //sprawdzanie czy uzytkownik dodal juz zgloszenie o takim samym tytule, kwocie i czasie. Mikro zabbezpieczenie anty-spamowe.
-        
-        $query = mysqli_query(dbConn(),"SELECT ''");
+        //sprawdzanie czy uzytkownik dodal juz zgloszenie o takim samym tytule. Mikro zabbezpieczenie anty-spamowe.
+        $query = mysqli_query(dbConn(),"SELECT 'user_owner', 'oferta_tytul' FORM 'zlecenia' where 'user_owner' = '".$_SESSION['user']."' AND 'oferta_tytul' = '".$tytul."'");
+        if($query) {
+            echo 'Przepraszamy, stworzyłeś już takie zlecenie.';
+            return;
+        }
+        //zapytanie dodajace zlecenie
+        mysqli_query(dbConn(),"INSERT INTO zlecenia (user_owner,oferta_tytul,srBudzet,waluta,srCzas,opis)
+        VALUES ('".$_SESSION['user']."','".$tytul."','".$budzet."','".$waluta."','".$czasWyk."','".$opis."');");
+        //sprawdzanie, czy zlecenie zostalo dodane prawidlowo
+        $zlecCheck = mysqli_query(dbConn(),"SELECT * FROM zlecenia WHERE user_owner = '".$_SESSION['user']."' AND tytul = '".$tytul."';");
+        if(mysqli_num_rows($zlecCheck) != 0) {
+            echo "Zlecenie zostało dodane prawidłowo. Przechodzę do zlecenia.";
+            //exit(header("Location:jeszczenieskonczylem"));
+            return true;
+        }
     }
     else {
         echo "Błąd aplikacji.";
