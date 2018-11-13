@@ -53,21 +53,22 @@ function potwierdzZlecenie($potwierdzenie) {
 
 function addZlecenie($tytul,$budzet,$waluta,$czasWyk,$opis,$potw) {
     if($tytul != null && $budzet != null && $waluta != null && $czasWyk != null && $opis != null && $potw != null) {
-        echo "Danie podane prawidłowo.";
         //sprawdzanie czy uzytkownik dodal juz zgloszenie o takim samym tytule. Mikro zabbezpieczenie anty-spamowe.
-        $query = mysqli_query(dbConn(),"SELECT 'user_owner', 'oferta_tytul' FORM 'zlecenia' where 'user_owner' = '".$_SESSION['user']."' AND 'oferta_tytul' = '".$tytul."'");
-        if($query) {
-            echo 'Przepraszamy, stworzyłeś już takie zlecenie.';
+        $query = mysqli_query(dbConn(),"SELECT * FROM zlecenia WHERE user_owner = '".$_SESSION['user']."' AND oferta_tytul = '".$tytul."'");
+        if(mysqli_num_rows($query) > 0) {
+            echo 'Przepraszamy, nie możesz stworzyć drugi raz tego samego zgłoszenia.';
             return;
         }
         //zapytanie dodajace zlecenie
         mysqli_query(dbConn(),"INSERT INTO zlecenia (user_owner,oferta_tytul,srBudzet,waluta,srCzas,opis)
         VALUES ('".$_SESSION['user']."','".$tytul."','".$budzet."','".$waluta."','".$czasWyk."','".$opis."');");
         //sprawdzanie, czy zlecenie zostalo dodane prawidlowo
-        $zlecCheck = mysqli_query(dbConn(),"SELECT * FROM zlecenia WHERE user_owner = '".$_SESSION['user']."' AND tytul = '".$tytul."';");
-        if(mysqli_num_rows($zlecCheck) != 0) {
+        $zlecCheck = mysqli_query(dbConn(),"SELECT * FROM zlecenia WHERE user_owner = '".$_SESSION['user']."' AND oferta_tytul = '".$tytul."'");
+        if(mysqli_num_rows($zlecCheck) == 1) {
             echo "Zlecenie zostało dodane prawidłowo. Przechodzę do zlecenia.";
-            //exit(header("Location:jeszczenieskonczylem"));
+            $nrZlec = mysqli_query(dbConn(),"SELECT id FROM zlecenia WHERE user_owner = '".$_SESSION['user']."' AND tytul = '".$tytul."';"); 
+            $idZ = mysqli_fetch_array(dbConn(),$nrZlec);
+            exit(header("Location:oferta/".$idZ[0]));
             return true;
         }
     }
@@ -75,5 +76,26 @@ function addZlecenie($tytul,$budzet,$waluta,$czasWyk,$opis,$potw) {
         echo "Błąd aplikacji.";
     }
 }
+
+function showZlecenia(/*$ilosc_zlecen, $order*/) {
+    $sql = mysqli_query(dbConn(),"SELECT * FROM zlecenia ORDER BY id_zamowienia");
+    if(mysqli_num_rows($sql) > 0) {
+        while($r = mysqli_fetch_assoc($sql)) {
+            echo '
+      <tr>
+      <th scope="row">'.$r['id_zamowienia'].'</th>
+      <td>'.$r['oferta_tytul'].'</td>
+      <td>'.$r['opis'].'</td>
+      <td>'.$r['srBudzet'].' '.$r['waluta'].'</td>
+      <td>'.$r['srCzas'].'</td>
+      <td>[niekatywne]</td>
+      <td><a href="#" class="btn btn-custom btn-lg">
+      <span class="glyphicon glyphicon-arrow-right"></span>Zobacz</td>
+      </tr>
+            ';
+    }
+}
+}
+
 
 ?>

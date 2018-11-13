@@ -1,3 +1,6 @@
+<?php
+include 'mediators/zlecenia-mediator.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +36,10 @@
     </tr>
   </thead>
   <tbody>
+   <?php
+      showZlecenia();
+      ?>
+<!--
     <tr>
       <th scope="row">1</th>
       <td>Layout sklepu internetowego</td>
@@ -63,6 +70,7 @@
       <td><a href="#" class="btn btn-custom btn-lg">
           <span class="glyphicon glyphicon-arrow-right"></span>Zobacz</td>
     </tr>
+-->
   </tbody>
 </table>
 </div>
