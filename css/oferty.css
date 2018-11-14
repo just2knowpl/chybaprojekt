@@ -1,4 +1,4 @@
-/** {
+* {
     padding: 0;
     margin: 0;
     text-align: center;
@@ -43,37 +43,6 @@
     width: 300px;
     overflow: auto;
     text-align: center;
-}*/
-
-
-.thead-custom
-{
-    background-color: #cdcdcd;
-    line-height: 20px;
-}
-
-.zobacz
-{
-    color: #A24D4D;
-}
-
-.zobacz:hover
-{
-    text-decoration: none;
-    color: #A24D4D;
-}
-
-.btn-custom
-{
-    background-color: #118866;
-    text-decoration: none;
-    color: #fff;
 }
 
 
-.btn-custom:hover
-{
-    background-color: #118866;
-    text-decoration: none;
-    color: #fff;
-}

@@ -11,7 +11,7 @@ if(!checkSession(@$_SESSION['user'])) {
 <h2>Tworzenie nowego zlecenia</h2>
 <form action="" method="post">
     <p><input type="text" name="zlecenieTytul" placeholder="Tytuł oferty" required></p>
-    <p><input type="text" name="zlecenieBudzetOd" placeholder="Twój budżet od.. required"> <!-- Walidacja - cyfry -->
+    <p><input type="text" name="zlecenieBudzetOd" placeholder="Twój budżet od.. " required> <!-- Walidacja - cyfry -->
     <input type="text" name="zlecenieBudzetDo" placeholder="Twój budżet do.." required></p> <!-- Walidacja - cyfry -->
     <p>Waluta: <select name='waluta' required>
         <option value="zl">zł</option>

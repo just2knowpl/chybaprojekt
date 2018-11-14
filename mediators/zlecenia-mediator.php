@@ -17,6 +17,8 @@ function setBudzet($budzetOd,$budzetDo) {
         $budzet = ($budzetOd + $budzetDo) / 2;
         return mysqli_real_escape_string(dbConn(),$budzet);
     }
+    else if($budzetOd == 0 && $budzetDo == 0) 
+        return mysqli_real_escape_string(dbConn(),"Bezpłatne");
     else {
         echo "Budżet nie może pozostać pusty";
         return null;
@@ -50,6 +52,7 @@ function potwierdzZlecenie($potwierdzenie) {
     return $potwierdzenie;
 }
 
+//dodawanie zlecenia. Funkcja sumująca
 
 function addZlecenie($tytul,$budzet,$waluta,$czasWyk,$opis,$potw) {
     if($tytul != null && $budzet != null && $waluta != null && $czasWyk != null && $opis != null && $potw != null) {
@@ -68,34 +71,79 @@ function addZlecenie($tytul,$budzet,$waluta,$czasWyk,$opis,$potw) {
             echo "Zlecenie zostało dodane prawidłowo. Przechodzę do zlecenia.";
             $nrZlec = mysqli_query(dbConn(),"SELECT id FROM zlecenia WHERE user_owner = '".$_SESSION['user']."' AND tytul = '".$tytul."';"); 
             $idZ = mysqli_fetch_array(dbConn(),$nrZlec);
-            exit(header("Location:oferta/".$idZ[0]));
+            exit(header("Location:oferty/"));
             return true;
         }
     }
     else {
-        echo "Błąd aplikacji.";
+        echo " Błąd aplikacji.";
     }
 }
 
+//Wyświetlanie zlecenia
+
 function showZlecenia(/*$ilosc_zlecen, $order*/) {
-    $sql = mysqli_query(dbConn(),"SELECT * FROM zlecenia ORDER BY id_zamowienia");
+    $sql = mysqli_query(dbConn(),"SELECT * FROM zlecenia ORDER BY id_zamowienia DESC");
     if(mysqli_num_rows($sql) > 0) {
+        $licznik = 1;
         while($r = mysqli_fetch_assoc($sql)) {
             echo '
       <tr>
-      <th scope="row">'.$r['id_zamowienia'].'</th>
-      <td>'.$r['oferta_tytul'].'</td>
+      <th scope="row">'.$licznik.'</th>
+      <td><a href="szczegoly?id="'.$r['id_zamowienia'].'">'.$r['oferta_tytul'].'</a></td>
       <td>'.$r['opis'].'</td>
-      <td>'.$r['srBudzet'].' '.$r['waluta'].'</td>
-      <td>'.$r['srCzas'].'</td>
+      <td>~'.$r['srBudzet'].' '.$r['waluta'].'</td>
+      <td>~'.$r['srCzas'].' dni</td>
       <td>[niekatywne]</td>
       <td><a href="#" class="btn btn-custom btn-lg">
-      <span class="glyphicon glyphicon-arrow-right"></span>Zobacz</td>
+      <span class="glyphicon glyphicon-arrow-right"></span><a href="szczegoly?id='.$r['id_zamowienia'].'">Zobacz</a></td>
       </tr>
             ';
+            $licznik++;
     }
 }
 }
 
 
+function showSzczegolyZlecenia($id,$geti) {
+    if(isset($id)) {
+        $_getInfo;
+        if(isset($geti)) {
+            switch($geti) {
+                case 'id':
+                    $_getInfo = 'id_zamowienia';
+                    break;
+                case 'tytul':
+                    $_getInfo = 'oferta_tytul';
+                    break;
+                case 'opis':
+                    $_getInfo = 'opis';
+                    break;
+                case 'budzet':
+                    $_getInfo = 'srBudzet';
+                    break;
+                case 'czas':
+                    $_getInfo = 'srCzas';
+                    break;
+            }
+        }
+        if($_getInfo) {
+            $find_szczegoly = mysqli_query(dbConn(),"SELECT * FROM zlecenia WHERE id_zamowienia = '".$id."'");
+            if(mysqli_num_rows($find_szczegoly) > 0) {
+                while($r = mysqli_fetch_assoc($find_szczegoly)) {
+                    return $r[$_getInfo];
+                }
+            }
+        }
+        
+    }
+}
+//function test() {
+//    try {
+//        $error = "test";
+//        throw new Exception($error);
+//    }
+//    catch(Exception $error) {
+//        echo 'Caught exception: '.$error;
+//}}
 ?>
