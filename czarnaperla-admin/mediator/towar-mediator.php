@@ -75,7 +75,7 @@ function addTowar($rodzaj, $producent, $ilosc) {
 //wyswietlanie wyników
 
 function wyswietlTowar() {
-    $sql = mysqli_query(dbConn(),"SELECT * FROM towar");
+    $sql = mysqli_query(dbConn(),"SELECT * FROM towar ORDER BY ilosc desc");
         if(mysqli_num_rows($sql) > 0) {
             
             echo '
@@ -98,7 +98,12 @@ function wyswietlTowar() {
                   <td>'.$r['firma'].'</td>
                   <td>'.rodzajTranslate($r['rodzaj']).'</td>
                   <td>'.$r['ilosc'].'</td>
-                  <td><a href="odejmij.php?id='.$r['id'].'"><button type="button" class="btn btn-danger"><i class="fas fa-minus"></i></button></a></td>
+                  ';
+                if($r['ilosc'] <= 0)
+                    echo '<td> </td>';
+                else
+                  echo '<td><a href="odejmij.php?id='.$r['id'].'"><button type="button" class="btn btn-danger"><i class="fas fa-minus"></i></button></a></td>';
+                echo '
                 </tr>
                 
                 ';
