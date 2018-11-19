@@ -17,6 +17,7 @@
         <a class="nav-link" href="lista-towarow">Zobacz wszystkie towary</a>
     </li>
       </ul>
+    <a href="panel-konfiguracyjny"><button class="btn btn-outline-success my-2 my-sm-0" type="button">Panel konfiguracyjny</button></a>
   </div>
 </nav>
      
