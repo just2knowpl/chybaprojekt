@@ -16,6 +16,10 @@ include 'mediator/general-mediator.php';
     </head>
     <body>
         
+    <!-- navbar start -->
+    <?php include 'include/header.php' ?>
+    <!--Navbar end -->
+        
     </body>
     
     
