@@ -22,7 +22,7 @@ include "mediators/index-mediator.php";
 </head>
 <body>
 
-<?php //include 'include/header_main_page.php'; ?>
+<?php include 'include/header_main_page.php'; ?>
 
 <h2>TUTAJ BĘDZIE STRONA GŁÓWNA DLA UŻYTKOWNIKA</h2> 
 <div style="display: <?php if(checkSession(@$_SESSION['user'])) echo "none"; else echo "block";?>"><a href="register">Zarejestruj sie</a></div>
