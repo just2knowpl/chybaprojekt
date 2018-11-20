@@ -1,4 +1,5 @@
-<?php include 'mediator/towar-mediator.php'; ?>
+<?php include 'mediator/towar-mediator.php';
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,7 +21,7 @@
         <?php include 'include/header.php' ?>
      <!--Navbar end -->
         
-        <?php wyswietlTowar() ?>
+        <?php wyswietlTowar(); ?>
         
     </body>
 </html>

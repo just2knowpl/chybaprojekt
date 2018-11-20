@@ -22,15 +22,15 @@ include 'mediator/general-mediator.php';
         
 <div class="card text-center">
   <div class="card-body">
-    <h5 class="card-title"><strong>Konfiguracja parametrów aplikacji</strong></h5>
-    <p class="card-text">Konfiguracja parametrów odpowiedzialnych za funkcjonowanie aplikacji</p>
-    <a href="#" class="btn btn-primary">Przejdź</a>
+    <h5 class="card-title"><strong>Lista firm</strong></h5>
+    <p class="card-text">Zarządzanie listą firm do których można przypisać towar.</p>
+    <a href="lista-firm" class="btn btn-primary">Przejdź</a>
   </div>
 </div>
         <div class="card text-center">
   <div class="card-body">
-    <h5 class="card-title"><strong>Zarządzanie użytkownikami</strong></h5>
-    <p class="card-text">Zmiana ustawień kont</p>
+    <h5 class="card-title"><strong>Lista rodzajów towarów</strong></h5>
+    <p class="card-text">Zarządzanie rodzajami towarów.</p>
     <a href="#" class="btn btn-primary">Przejdź</a>
   </div>
 </div>

@@ -62,10 +62,15 @@ function addTowar($rodzaj, $producent, $ilosc) {
              $nowa_ilosc;
                 $r = mysqli_fetch_assoc($check_sql);
                 $nowa_ilosc = $r['ilosc'] + $ilosc;
+                $nowa_ilosc_ogolna = $r['ilosc_ogolna'] + $ilosc;
                 mysqli_query(dbConn(),"UPDATE towar SET ilosc = '".$nowa_ilosc."' WHERE rodzaj = '".$rodzaj."' AND firma = '".$producent."'");
+                mysqli_query(dbConn(),"UPDATE towar SET ilosc_ogolna = '".$nowa_ilosc_ogolna."' WHERE rodzaj = '".$rodzaj."' AND firma = '".$producent."'");
+                if($_SESSION['edit'])
+                    unset($_SESSION['edit']);
+                    exit(header("Location: lista-towarow"));
          }
         else {
-        mysqli_query(dbConn(),"INSERT INTO towar (rodzaj,firma,ilosc) VALUES ('".$rodzaj."','".$producent."','".$ilosc."')"); 
+        mysqli_query(dbConn(),"INSERT INTO towar (rodzaj,firma,ilosc,ilosc_ogolna) VALUES ('".$rodzaj."','".$producent."','".$ilosc."','".$ilosc."')"); 
         }
     }
 }
@@ -78,6 +83,10 @@ function wyswietlTowar() {
     $sql = mysqli_query(dbConn(),"SELECT * FROM towar ORDER BY ilosc desc");
         if(mysqli_num_rows($sql) > 0) {
             
+            $ilosc_ogolna = 0;
+            $ilosc_stan = 0;
+            $ilosc_usunietych = 0;
+            
             echo '
             <table class="table table-striped">
               <thead>
@@ -85,7 +94,9 @@ function wyswietlTowar() {
                   <th scope="col">Firma</th>
                   <th scope="col">Rodzaj towaru</th>
                   <th scope="col">Ilość</th>
-                  <th scope="col" style="color: red;">Odejmij</th>
+                  <th scope="col">Stan całościowy</th>
+                  <th scope="col">Ilość usuniętego towaru</th>
+                  <th scope="col" style="color: red;">Odejmij<span style="color:black;">/</span><spamn style="color:green;">Dodaj</span></th>
                 </tr>
               </thead>
               <tbody>
@@ -98,26 +109,55 @@ function wyswietlTowar() {
                   <td>'.$r['firma'].'</td>
                   <td>'.rodzajTranslate($r['rodzaj']).'</td>
                   <td>'.$r['ilosc'].'</td>
-                  ';
-                if($r['ilosc'] <= 0)
+                  
+                <td> '.$r['ilosc_ogolna'].' </td>
+                
+                <td> '.$r['ilosc_usunietych'].' </td>
+                ';
+                 if($r['ilosc'] <= 0)
                     echo '<td> </td>';
                 else
-                  echo '<td><a href="odejmij.php?id='.$r['id'].'"><button type="button" class="btn btn-danger"><i class="fas fa-minus"></i></button></a></td>';
+                  echo '<td><a href="odejmij.php?id='.$r['id'].'"><button type="button" class="btn btn-danger"><i class="fas fa-minus"></i></button></a>
+                  
+                  <a href="dodaj.php?id='.$r['id'].'"><button type="button" class="btn btn-success"><i class="fas fa-plus"></i></button></a>
+                  </td>';
                 echo '
                 </tr>
                 
+                
                 ';
+                $ilosc_stan += $r['ilosc'];
+                $ilosc_ogolna += $r['ilosc_ogolna'];
+                $ilosc_usunietych += $r['ilosc_usunietych'];
             }
+            $strata = $ilosc_ogolna - ($ilosc_stan + $ilosc_usunietych);
             echo '
+            <tr>
+                <td><strong>Podsumowanie:</td>
+                <td></td>
+                <td><strong>'.$ilosc_stan.' szt.</strong></td>
+                <td><strong>'.$ilosc_ogolna.' szt.</strong></td>
+                <td><strong>'.$ilosc_usunietych.' szt.</strong></td>
+                <td><strong>Strata towaru: '.$strata.' szt.</strong></td>
               </tbody>
             </table>
             ';
         }
     else 
-        return " Nie znaleziono rekordów. ";
+        echo " Nie znaleziono rekordów. <a href='dodaj-towar'>Dodaj nowy towar</a>";
+        return null;
 }
 
+//Wysweitlanie aktualnej listy frim
 
+function wyswietlFirmy() {
+    $sq = mysqli_query(dbConn(),"SELECT * FROM firmy");
+    if(mysqli_num_rows($sq) > 0) {
+        while($r = mysqli_fetch_assoc($sq)) {
+    echo '<div class="shadow p-3 mb-5 bg-white rounded">'.$r['nazwa'].'</div>';
+        }
+    }
+}
 
 ?>
 

@@ -10,9 +10,13 @@
       <li class="nav-item active">
         <a class="nav-link" href="index">Strona Główna</a>
       </li>
+        <?php
+        if(!isset($_SESSION['edit']) || !$_SESSION['edit'])
+            echo '
       <li class="nav-item">
         <a class="nav-link" href="dodaj-towar">Dodaj nowy towar</a>
-      </li>
+      </li>';
+          ?>
     <li class="nav-item">
         <a class="nav-link" href="lista-towarow">Zobacz wszystkie towary</a>
     </li>
