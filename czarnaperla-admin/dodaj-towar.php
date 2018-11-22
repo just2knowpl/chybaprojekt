@@ -18,8 +18,25 @@
         <?php include 'include/header.php' ?>
      <!--Navbar end -->
       
-      
-       <section>
+        <section class="<?php if(dodajWidoczny()) echo "visible"; else echo "invisible"; ?>">
+            
+            
+        <div class="alert alert-warning" role="alert">
+          Wystąpił błąd. Nie możesz dodać nowego towaru ponieważ nie posiadasz w swojej bazie żadnej firmy. <a href='lista-firm'>Dodaj nową firmę</a>, aby uzyskać dostęp do utworzenia nowego towaru.
+        </div>
+            
+        </section>
+        
+        <section style="display:<?php if(dodajWidocznyRodzaj()) echo "block"; else echo "none"; ?>">
+            
+            
+        <div class="alert alert-warning" role="alert">
+          Wystąpił błąd. Nie możesz dodać nowego towaru ponieważ nie posiadasz w swojej bazie żadnego <strong>rodzaju towaru.</strong> <a href='lista-rodzajow'>Dodaj nowy rodzaj towaru</a>, aby uzyskać dostęp do utworzenia nowego towaru.
+        </div>
+            
+        </section>
+        
+       <section class="<?php if(!dodajWidoczny() && !dodajWidocznyRodzaj()) echo "visible"; else echo "invisible"; ?>">
         <h1>Dodawanie nowego towaru</h1>
            <?php 
     if(isset($_SESSION['edit']) && $_SESSION['edit'] == true)
@@ -28,18 +45,25 @@
           </div>'; 
            ?>
 <form action="" method="post">
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Firma</label>
-    <input type="text" class="form-control" name="firma" value="<?php if(isset($_SESSION['firma'])) echo $_SESSION['firma']; ?>" placeholder="Przykład: Zara" <?php if(isset($_SESSION['edit']) && $_SESSION['edit']) echo "readonly";?> required>
+
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Firma</label>
+    <select class="form-control" name="firma" <?php if(isset($_SESSION['edit']) && $_SESSION['edit']) echo "readonly"; ?> required>
+        <?php wypiszFirmySelect() ?>
+    </select>
   </div>
+
   <div class="form-group">
     <label for="exampleFormControlSelect1">Rodzaj towaru</label>
     <select class="form-control" name="rodzaj" value="<?php if(isset($_SESSION['rodzaj'])) echo $_SESSION['rodzaj'];?>" <?php if(isset($_SESSION['edit']) && $_SESSION['edit']) echo "readonly"; ?> required>
+     <?php wypiszRodzajeSelect() ?>
+<!--
       <option value="koszulka_d">Koszulka Damska</option>
       <option value="Koszulka_m">Koszulka Męska</option>
       <option value="spodnie">Spodnie</option>
       <option value="akcesoria">Akcesoria</option>
       <option value="inne">Inne</option>
+-->
     </select>
   </div>
   <div class="form-group">
@@ -49,9 +73,7 @@
   <button type="submit" name='dodaj' class="btn btn-primary mb-2">Dodaj towar</button>
 </form>
         <?php
-    unset($_SESSION['firma']);
-    unset($_SESSION['rodzaj']);
-    unset($_SESSION['edit']);
+        wyczyscDaneEdycji();
            if(isset($_POST['dodaj'])) {
                 addTowar(setRodzaj($_POST['rodzaj']),setFirma($_POST['firma']),setIlosc($_POST['ilosc']));
                

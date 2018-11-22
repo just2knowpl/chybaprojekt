@@ -32,6 +32,17 @@ function setIlosc($ilosc) {
 }
 
 function rodzajTranslate($rodzaj) {
+    $translateRodzajQuery = mysqli_query(dbConn(),"SELECT * FROM rodzaje WHERE value='".$rodzaj."'");
+    if(mysqli_num_rows($translateRodzajQuery) > 0) {
+        $r = mysqli_fetch_assoc($translateRodzajQuery);
+        return str_replace("_"," ",strtoupper($r['value']));
+    }
+    else {
+        echo "niezidentyfikowany typ towaru";
+    }
+    
+    
+    
     switch($rodzaj) {
         case 'spodnie':
             return "Spodnie";
@@ -53,6 +64,57 @@ function rodzajTranslate($rodzaj) {
     }
 }
 
+function nowaFirmaValid($firma) {
+    if(!empty($firma) && $firma != null) {
+        $chcqr = mysqli_query(dbConn(),"SELECT * FROM firmy WHERE nazwa = '".$firma."'");
+        if(mysqli_num_rows($chcqr) == 0) {
+            return mysqli_real_escape_string(dbConn(),$firma);
+        }
+        else {
+            echo '<div class="alert alert-danger" role="alert">
+                   Taka firma istnieje już w bazie.
+                  </div>';
+            return null;
+        }
+        
+    }
+    else {
+        echo '<div class="alert alert-danger" role="alert">
+                Pole "firma" nie może pozostac puste!
+              </div>';
+        return null;
+    }
+}
+
+function nowyRodzajValid($rodzaj) {
+    if(!empty($rodzaj) && $rodzaj != null) {
+        $chcqr = mysqli_query(dbConn(),"SELECT * FROM rodzaje WHERE rodzaj = '".$rodzaj."'");
+        if(mysqli_num_rows($chcqr) == 0) {
+            return mysqli_real_escape_string(dbConn(),$rodzaj);
+        }
+        else {
+            echo '<div class="alert alert-danger" role="alert">
+                   Taki rodzaj towaru istnieje już w bazie.
+                  </div>';
+            return null;
+        }
+        
+    }
+    else {
+        echo '<div class="alert alert-danger" role="alert">
+                Pole "rodzaj towaru" nie może pozostać puste!
+              </div>';
+        return null;
+    }
+}
+
+//czyszczenie informacji o edycji pola
+function wyczyscDaneEdycji() {
+    unset($_SESSION['firma']);
+    unset($_SESSION['rodzaj']);
+    unset($_SESSION['edit']);
+}
+
 //funkcja wykonawcza
 
 function addTowar($rodzaj, $producent, $ilosc) {
@@ -65,9 +127,7 @@ function addTowar($rodzaj, $producent, $ilosc) {
                 $nowa_ilosc_ogolna = $r['ilosc_ogolna'] + $ilosc;
                 mysqli_query(dbConn(),"UPDATE towar SET ilosc = '".$nowa_ilosc."' WHERE rodzaj = '".$rodzaj."' AND firma = '".$producent."'");
                 mysqli_query(dbConn(),"UPDATE towar SET ilosc_ogolna = '".$nowa_ilosc_ogolna."' WHERE rodzaj = '".$rodzaj."' AND firma = '".$producent."'");
-                if($_SESSION['edit'])
-                    unset($_SESSION['edit']);
-                    exit(header("Location: lista-towarow"));
+                exit(header("Location: lista-towarow"));
          }
         else {
         mysqli_query(dbConn(),"INSERT INTO towar (rodzaj,firma,ilosc,ilosc_ogolna) VALUES ('".$rodzaj."','".$producent."','".$ilosc."','".$ilosc."')"); 
@@ -96,7 +156,8 @@ function wyswietlTowar() {
                   <th scope="col">Ilość</th>
                   <th scope="col">Stan całościowy</th>
                   <th scope="col">Ilość usuniętego towaru</th>
-                  <th scope="col" style="color: red;">Odejmij<span style="color:black;">/</span><spamn style="color:green;">Dodaj</span></th>
+                  <th scope="col" style="color: red;">Odejmij</th>
+                  <th><spam style="color:green;">Dodaj</span></th>
                 </tr>
               </thead>
               <tbody>
@@ -106,7 +167,7 @@ function wyswietlTowar() {
                 echo '
                 
                 <tr>
-                  <td>'.$r['firma'].'</td>
+                  <td>'.str_replace("_"," ",strtoupper($r['firma'])).'</td>
                   <td>'.rodzajTranslate($r['rodzaj']).'</td>
                   <td>'.$r['ilosc'].'</td>
                   
@@ -117,9 +178,9 @@ function wyswietlTowar() {
                  if($r['ilosc'] <= 0)
                     echo '<td> </td>';
                 else
-                  echo '<td><a href="odejmij.php?id='.$r['id'].'"><button type="button" class="btn btn-danger"><i class="fas fa-minus"></i></button></a>
-                  
-                  <a href="dodaj.php?id='.$r['id'].'"><button type="button" class="btn btn-success"><i class="fas fa-plus"></i></button></a>
+                  echo '<td><a href="odejmij.php?id='.$r['id'].'"><button type="button" class="btn btn-danger"><i class="fas fa-minus"></i></button></a></td>';
+                echo '
+                  <td><a href="dodaj.php?id='.$r['id'].'"><button type="button" class="btn btn-success"><i class="fas fa-plus"></i></button></a>
                   </td>';
                 echo '
                 </tr>
@@ -138,7 +199,8 @@ function wyswietlTowar() {
                 <td><strong>'.$ilosc_stan.' szt.</strong></td>
                 <td><strong>'.$ilosc_ogolna.' szt.</strong></td>
                 <td><strong>'.$ilosc_usunietych.' szt.</strong></td>
-                <td><strong>Strata towaru: '.$strata.' szt.</strong></td>
+                <td><strong> </strong></td>
+                <td><strong> </strong></td>
               </tbody>
             </table>
             ';
@@ -155,6 +217,75 @@ function wyswietlFirmy() {
     if(mysqli_num_rows($sq) > 0) {
         while($r = mysqli_fetch_assoc($sq)) {
     echo '<div class="shadow p-3 mb-5 bg-white rounded">'.$r['nazwa'].'</div>';
+        }
+    }
+    else {
+        echo '<div class="alert alert-primary" role="alert">
+                Nie posiadasz firm w bazie danych. Dodaj nową za pomocą formularza znajdującego się poniżej.
+              </div>';
+    }
+}
+
+function dodajFirmy($firma) {
+    if($firma != null) {
+        //$value = strtolower(str_replace(" ","_",$firma));
+        $value = strtolower(str_replace(" ","_",$firma));
+        mysqli_query(dbConn(),"INSERT INTO firmy(nazwa,value,data_dodania) VALUES('".$firma."','".$value."','".date("Y-m-d")."')");
+        $qr = mysqli_query(dbConn(),"SELECT * FROM firmy WHERE nazwa = '".$firma."'");
+        if(mysqli_num_rows($qr) > 0) {
+            echo '<div class="alert alert-success" role="alert">
+                    Pomyślnie dodano nową firmę '.$firma.' do bazy danych.
+                  </div> ';
+            exit(header("Location: lista-firm"));
+        }
+    }
+}
+function wypiszFirmySelect() {
+    $pobierz = mysqli_query(dbConn(),"SELECT * FROM firmy");
+    if(mysqli_num_rows($pobierz) > 0) {
+        while($r = mysqli_fetch_assoc($pobierz)) {
+            echo '
+            <option value="'.$r['value'].'">'.$r['nazwa'].'</option>
+            ';
+        }
+    }
+}
+function dodajWidoczny() {
+    $pobierz = mysqli_query(dbConn(),"SELECT * FROM firmy");
+    if(mysqli_num_rows($pobierz) > 0)
+        return false;
+    return true;
+}
+function dodajWidocznyRodzaj() {
+    $pobierz = mysqli_query(dbConn(),"SELECT * FROM rodzaje");
+    if(mysqli_num_rows($pobierz) > 0)
+        return false;
+    return true;
+}
+
+function dodajRodzaj($rodzaj) {
+    if($rodzaj != null) {
+        //$value = strtolower(str_replace(" ","_",$firma));
+        $values = strtolower(str_replace(" ","_",$rodzaj));
+        mysqli_query(dbConn(),"INSERT INTO rodzaje(rodzaj,value) VALUES('".$rodzaj."','".$values."')");
+        $qry = mysqli_query(dbConn(),"SELECT * FROM rodzaje WHERE rodzaj = '".$rodzaj."'");
+        if(mysqli_num_rows($qry) > 0) {
+            echo '<div class="alert alert-success" role="alert">
+                    Pomyślnie dodano nowy rodzaj '.$rodzaj.' do bazy danych.
+                  </div> ';
+        }
+        else {
+        }
+    }
+    
+}
+function wypiszRodzajeSelect() {
+    $pobierz = mysqli_query(dbConn(),"SELECT * FROM rodzaje");
+    if(mysqli_num_rows($pobierz) > 0) {
+        while($r = mysqli_fetch_assoc($pobierz)) {
+            echo '
+            <option value="'.$r['value'].'">'.$r['rodzaj'].'</option>
+            ';
         }
     }
 }

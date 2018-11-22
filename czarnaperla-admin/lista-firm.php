@@ -23,6 +23,21 @@ include 'mediator/towar-mediator.php';
 <?php wyswietlFirmy() ?>
         
         
+        <h2>Dodaj nową firme</h2>
+
+        <form method="post">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Nazwa firmy</label>
+    <input type="text" class="form-control" name='firmaNowa' placeholder="Wpisz nazwę nowej firmy" required>
+  </div>
+  <button type="submit" class="btn btn-primary btn btn-success">Dodaj</button>
+</form>           
+<?php
+    if(isset($_POST['firmaNowa'])) {
+        dodajFirmy(nowaFirmaValid($_POST['firmaNowa']));
+    }
+    ?>
+    
     </body>
     
     

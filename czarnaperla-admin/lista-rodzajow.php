@@ -1,5 +1,5 @@
 <?php
-include 'mediator/general-mediator.php';
+include 'mediator/towar-mediator.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,28 +20,21 @@ include 'mediator/general-mediator.php';
     <?php include 'include/header.php' ?>
     <!--Navbar end -->
         
-<div class="card text-center">
-  <div class="card-body">
-    <h5 class="card-title"><strong>Lista firm</strong></h5>
-    <p class="card-text">Zarządzanie listą firm do których można przypisać towar.</p>
-    <a href="lista-firm" class="btn btn-primary">Przejdź</a>
-  </div>
-</div>
-        <div class="card text-center">
-  <div class="card-body">
-    <h5 class="card-title"><strong>Lista rodzajów towarów</strong></h5>
-    <p class="card-text">Zarządzanie rodzajami towarów.</p>
-    <a href="lista-rodzajow" class="btn btn-primary">Przejdź</a>
-  </div>
-</div>
-        <div class="card text-center">
-  <div class="card-body">
-    <h5 class="card-title">W.I.P</h5>
-    <p class="card-text">W budowie..</p>
-    <a href="#" class="btn btn-primary">Przejdź</a>
-  </div>
-</div>
         
+        <form method="post">
+  <div class="form-group">
+    <label for="rodzajTowaru">Podaj nowy rodzaj towaru</label>
+    <input type="text" class="form-control" name="nRodzaj" id="rodzajTowaru"  placeholder="Rodzaj towaru">
+  </div>
+  <button type="submit" name="akc_rodz" class="btn btn-primary">Dodaj</button>
+</form>
+    <?php 
+    
+    if(isset($_POST['akc_rodz'])) {
+        dodajRodzaj(nowyRodzajValid($_POST['nRodzaj']));
+    }
+    
+    ?>    
     </body>
     
     
