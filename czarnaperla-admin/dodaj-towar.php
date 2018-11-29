@@ -49,14 +49,20 @@
 <div class="form-group">
     <label for="exampleFormControlSelect1">Firma</label>
     <select class="form-control" name="firma" <?php if(isset($_SESSION['edit']) && $_SESSION['edit']) echo "readonly"; ?> required>
-        <?php wypiszFirmySelect() ?>
+        <?php
+        if(isset($_SESSION['rodzaj']))
+            wypiszFirmySelect($_SESSION['firma']);
+        wypiszFirmySelect(null); ?>
     </select>
   </div>
 
   <div class="form-group">
     <label for="exampleFormControlSelect1">Rodzaj towaru</label>
     <select class="form-control" name="rodzaj" value="<?php if(isset($_SESSION['rodzaj'])) echo $_SESSION['rodzaj'];?>" <?php if(isset($_SESSION['edit']) && $_SESSION['edit']) echo "readonly"; ?> required>
-     <?php wypiszRodzajeSelect(); ?>
+     <?php
+        if(isset($_SESSION['rodzaj']))
+            wypiszRodzajeSelect($_SESSION['rodzaj']);
+        wypiszRodzajeSelect(null); ?>
     </select>
   </div>
   <div class="form-group">

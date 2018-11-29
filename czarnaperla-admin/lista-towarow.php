@@ -26,12 +26,8 @@
                 this.ilosc = _ilosc;
             }
             
-            function przejdz(il=null) {
+            function przejdz(il) {
             setIlosc(il);
-            if(ilosc == null) {
-                alert("Ilość nie może być pusta.");
-                return;
-            }
             var ilosc = document.getElementById('ilosc_do_usuniecia').value;
             console.log('odejmij.php?id='+id+'&ilosc='+ilosc);
            window.location.href = 'odejmij.php?id='+id+'&ilosc='+ilosc;
@@ -46,6 +42,13 @@
       <!-- navbar start -->
         <?php include 'include/header.php' ?>
      <!--Navbar end -->
+      
+        <div class="alert alert-danger" style='display: <?php if(isset($_SESSION['czyIloscPrawidlowa']) && $_SESSION['czyIloscPrawidlowa'] == false) echo 'block'; else if(!isset($_SESSION['czyIloscPrawidlowa']) || $_SESSION['czyIloscPrawidlowa'] == true) echo 'none'; ?>' role="alert">
+          Ilość nie została odjęta. Podana ilość jest większa niż stan towaru.
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
        
        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -101,6 +104,7 @@
 </ul>
        
         <?php 
+        unset($_SESSION['czyIloscPrawidlowa']);
         if(isset($_POST['wyszukaj']))
         wyswietlTowar(wyszukiwanieTowaru($_POST['wyszukiwarka'])); 
         else 

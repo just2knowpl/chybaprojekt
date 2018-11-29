@@ -246,13 +246,19 @@ function dodajFirmy($firma) {
         }
     }
 }
-function wypiszFirmySelect() {
+function wypiszFirmySelect($edit_firmy) {
     $pobierz = mysqli_query(dbConn(),"SELECT * FROM firmy");
     if(mysqli_num_rows($pobierz) > 0) {
         while($r = mysqli_fetch_assoc($pobierz)) {
+            if($edit_firmy == $r['value']) {
+                echo '<option value="'.$r['value'].'" selected>'.$r['nazwa'].'</option>
+            ';
+            }
+            else {
             echo '
             <option value="'.$r['value'].'">'.$r['nazwa'].'</option>
             ';
+            }
         }
     }
 }
@@ -285,13 +291,18 @@ function dodajRodzaj($rodzaj) {
     }
     
 }
-function wypiszRodzajeSelect() {
+function wypiszRodzajeSelect($edit_rodzaj) {
     $pobierz = mysqli_query(dbConn(),"SELECT * FROM rodzaje");
     if(mysqli_num_rows($pobierz) > 0) {
         while($r = mysqli_fetch_assoc($pobierz)) {
+            if($edit_rodzaj == $r['value']) {
+            echo '<option value="'.$r['value'].'" selected>'.$r['rodzaj'].'</option>';
+            }
+            else {
             echo '
             <option value="'.$r['value'].'">'.$r['rodzaj'].'</option>
             ';
+            }
         }
     }
 }
