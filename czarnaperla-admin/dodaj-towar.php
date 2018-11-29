@@ -56,14 +56,7 @@
   <div class="form-group">
     <label for="exampleFormControlSelect1">Rodzaj towaru</label>
     <select class="form-control" name="rodzaj" value="<?php if(isset($_SESSION['rodzaj'])) echo $_SESSION['rodzaj'];?>" <?php if(isset($_SESSION['edit']) && $_SESSION['edit']) echo "readonly"; ?> required>
-     <?php wypiszRodzajeSelect() ?>
-<!--
-      <option value="koszulka_d">Koszulka Damska</option>
-      <option value="Koszulka_m">Koszulka Męska</option>
-      <option value="spodnie">Spodnie</option>
-      <option value="akcesoria">Akcesoria</option>
-      <option value="inne">Inne</option>
--->
+     <?php wypiszRodzajeSelect(); ?>
     </select>
   </div>
   <div class="form-group">

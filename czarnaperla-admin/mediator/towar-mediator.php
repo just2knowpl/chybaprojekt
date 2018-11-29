@@ -113,6 +113,7 @@ function wyczyscDaneEdycji() {
     unset($_SESSION['firma']);
     unset($_SESSION['rodzaj']);
     unset($_SESSION['edit']);
+    unset($_SESSION['wysz']); 
 }
 
 //funkcja wykonawcza
@@ -127,20 +128,25 @@ function addTowar($rodzaj, $producent, $ilosc) {
                 $nowa_ilosc_ogolna = $r['ilosc_ogolna'] + $ilosc;
                 mysqli_query(dbConn(),"UPDATE towar SET ilosc = '".$nowa_ilosc."' WHERE rodzaj = '".$rodzaj."' AND firma = '".$producent."'");
                 mysqli_query(dbConn(),"UPDATE towar SET ilosc_ogolna = '".$nowa_ilosc_ogolna."' WHERE rodzaj = '".$rodzaj."' AND firma = '".$producent."'");
-                exit(header("Location: lista-towarow"));
          }
         else {
         mysqli_query(dbConn(),"INSERT INTO towar (rodzaj,firma,ilosc,ilosc_ogolna) VALUES ('".$rodzaj."','".$producent."','".$ilosc."','".$ilosc."')"); 
         }
     }
+    exit(header("Location: lista-towarow"));
 }
 
 
 
 //wyswietlanie wyników
 
-function wyswietlTowar() {
-    $sql = mysqli_query(dbConn(),"SELECT * FROM towar ORDER BY ilosc desc");
+function wyswietlTowar($wyszukiwarka = null) {
+    $sql;
+    if($wyszukiwarka != null) {
+        $sql = $wyszukiwarka; 
+    }
+    else
+        $sql = mysqli_query(dbConn(),"SELECT * FROM towar");
         if(mysqli_num_rows($sql) > 0) {
             
             $ilosc_ogolna = 0;
@@ -178,7 +184,7 @@ function wyswietlTowar() {
                  if($r['ilosc'] <= 0)
                     echo '<td> </td>';
                 else
-                  echo '<td><a href="odejmij.php?id='.$r['id'].'"><button type="button" class="btn btn-danger"><i class="fas fa-minus"></i></button></a></td>';
+                  echo '<td><button type="button" class="btn btn-danger" id="'.$r['id'].'" data-toggle="modal" data-target="#exampleModalCenter" onClick="setId(this.id)"><i class="fas fa-minus"></i></button></td>';
                 echo '
                   <td><a href="dodaj.php?id='.$r['id'].'"><button type="button" class="btn btn-success"><i class="fas fa-plus"></i></button></a>
                   </td>';
@@ -288,6 +294,10 @@ function wypiszRodzajeSelect() {
             ';
         }
     }
+}
+function wyszukiwanieTowaru($fraza) {
+    $_SESSION['wysz'] = $fraza;
+    return mysqli_query(dbConn(),"SELECT * FROM towar WHERE rodzaj LIKE '%".$fraza."%' OR firma LIKE '%".$fraza."%'");
 }
 
 ?>

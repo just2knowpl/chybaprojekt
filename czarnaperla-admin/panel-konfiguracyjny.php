@@ -34,13 +34,7 @@ include 'mediator/general-mediator.php';
     <a href="lista-rodzajow" class="btn btn-primary">Przejdź</a>
   </div>
 </div>
-        <div class="card text-center">
-  <div class="card-body">
-    <h5 class="card-title">W.I.P</h5>
-    <p class="card-text">W budowie..</p>
-    <a href="#" class="btn btn-primary">Przejdź</a>
-  </div>
-</div>
+
         
     </body>
     
