@@ -3,7 +3,7 @@
 *Mediator globalny.
 */
 session_start();
-
+ob_start();
 function dbConn() {
     $dbuser = "root";
     $dbhost = "localhost";
