@@ -57,8 +57,8 @@
   </div>
 
   <div class="form-group">
-    <label for="exampleFormControlSelect1">Rodzaj towaru</label>
-    <select class="form-control" name="rodzaj" value="<?php if(isset($_SESSION['rodzaj'])) echo $_SESSION['rodzaj'];?>" <?php if(isset($_SESSION['edit']) && $_SESSION['edit']) echo "readonly"; ?> required>
+    <label>Rodzaj towaru</label>
+    <select class="form-control" name="rodzaj" <?php if(isset($_SESSION['edit']) && $_SESSION['edit']) echo "readonly"; ?> required>
      <?php
         if(isset($_SESSION['rodzaj']))
             wypiszRodzajeSelect($_SESSION['rodzaj']);

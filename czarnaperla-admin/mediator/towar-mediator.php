@@ -164,6 +164,7 @@ function wyswietlTowar($wyszukiwarka = null) {
                   <th scope="col">Ilość usuniętego towaru</th>
                   <th scope="col" style="color: red;">Odejmij</th>
                   <th><spam style="color:green;">Dodaj</span></th>
+                  <th><spam style="color:#3b7fed;">Szczegóły</span></th>
                 </tr>
               </thead>
               <tbody>
@@ -189,6 +190,9 @@ function wyswietlTowar($wyszukiwarka = null) {
                   <td><a href="dodaj.php?id='.$r['id'].'"><button type="button" class="btn btn-success"><i class="fas fa-plus"></i></button></a>
                   </td>';
                 echo '
+                <td><a href="szczegoly.php?id='.$r['id'].'"><button type="button" class="btn btn-primary"><i class="fas fa-info"></i></button></a>
+                  </td>';
+                echo '
                 </tr>
                 
                 
@@ -205,6 +209,7 @@ function wyswietlTowar($wyszukiwarka = null) {
                 <td><strong>'.$ilosc_stan.' szt.</strong></td>
                 <td><strong>'.$ilosc_ogolna.' szt.</strong></td>
                 <td><strong>'.$ilosc_usunietych.' szt.</strong></td>
+                <td><strong> </strong></td>
                 <td><strong> </strong></td>
                 <td><strong> </strong></td>
               </tbody>
