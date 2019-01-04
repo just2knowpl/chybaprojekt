@@ -1,5 +1,6 @@
 <?php
 include 'general-mediator.php';
+include 'powiadomienia-mediator.php';
 
 //Dodawanie towaru.
 
@@ -116,6 +117,33 @@ function wyczyscDaneEdycji() {
     unset($_SESSION['wysz']); 
 }
 
+function changeChars($echo) {
+    $znaki[0] = "ą";
+    $znaki[1] = "ś";
+    $znaki[2] = "ć";
+    $znaki[3] = "ł";
+    $znaki[4] = "ó";
+    $znaki[5] = "ż";
+    $znaki[6] = "ź";
+    $znaki[7] = "ć";
+    $znaki[8] = "ń";
+    $znaki[8] = " ";
+//    
+//    $alternator[0] = "&#x0105;";
+//    $alternator[1] = "&#x015A;";
+//    $alternator[2] = "";
+//    $alternator[3] = "";
+//    $alternator[4] = "";
+//    $alternator[5] = "";
+//    $alternator[6] = "";
+//    $alternator[7] = "";
+//    $alternator[8] = "_";
+        
+    for($i=0;$i<=count($znaki);$i++) {
+//        str_replace("_"," ",strtoupper($r['firma'])).
+    }
+    
+}
 //funkcja wykonawcza
 
 function addTowar($rodzaj, $producent, $ilosc) {
@@ -146,7 +174,7 @@ function wyswietlTowar($wyszukiwarka = null) {
         $sql = $wyszukiwarka; 
     }
     else
-        $sql = mysqli_query(dbConn(),"SELECT * FROM towar");
+        $sql = mysqli_query(dbConn(),"SELECT * FROM towar ORDER BY firma");
         if(mysqli_num_rows($sql) > 0) {
             
             $ilosc_ogolna = 0;
