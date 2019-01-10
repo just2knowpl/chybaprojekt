@@ -18,6 +18,15 @@ function setFirma($producent) {
     echo " Proszę wybrać firmę. ";
     return null;
 }
+function setCena($cena) {
+    if(isset($cena)) {
+        return mysqli_real_escape_string(dbConn(),$cena);
+    }
+    if(!isset($_SESSION['edit'])) {
+        echo "Proszę podać cenę";
+        return null;
+    }
+}
 function setIlosc($ilosc) {
     if(isset($ilosc)) {
         if($ilosc > 0) {
@@ -146,8 +155,8 @@ function changeChars($echo) {
 }
 //funkcja wykonawcza
 
-function addTowar($rodzaj, $producent, $ilosc) {
-    if($rodzaj != null && $producent != null && $ilosc != null) {
+function addTowar($rodzaj, $producent, $ilosc, $cena) {
+    if($rodzaj != null && $producent != null && $ilosc != null && $cena) {
         $check_sql = mysqli_query(dbConn(),"SELECT * FROM towar WHERE rodzaj = '".$rodzaj."' AND firma = '".$producent."'");
          if(mysqli_num_rows($check_sql) > 0) {
              $nowa_ilosc;
@@ -158,7 +167,7 @@ function addTowar($rodzaj, $producent, $ilosc) {
                 mysqli_query(dbConn(),"UPDATE towar SET ilosc_ogolna = '".$nowa_ilosc_ogolna."' WHERE rodzaj = '".$rodzaj."' AND firma = '".$producent."'");
          }
         else {
-        mysqli_query(dbConn(),"INSERT INTO towar (rodzaj,firma,ilosc,ilosc_ogolna) VALUES ('".$rodzaj."','".$producent."','".$ilosc."','".$ilosc."')"); 
+        mysqli_query(dbConn(),"INSERT INTO towar (rodzaj,firma,ilosc,ilosc_ogolna,cena) VALUES ('".$rodzaj."','".$producent."','".$ilosc."','".$ilosc."','".$cena."')"); 
         }
     }
     exit(header("Location: lista-towarow"));
@@ -180,6 +189,7 @@ function wyswietlTowar($wyszukiwarka = null) {
             $ilosc_ogolna = 0;
             $ilosc_stan = 0;
             $ilosc_usunietych = 0;
+            $wartosc_towaru = 0;
             
             echo '
             <table class="table table-striped">
@@ -190,6 +200,7 @@ function wyswietlTowar($wyszukiwarka = null) {
                   <th scope="col">Ilość</th>
                   <th scope="col">Stan całościowy</th>
                   <th scope="col">Ilość usuniętego towaru</th>
+                  <th scope="col">Cena towaru</th>
                   <th scope="col" style="color: red;">Odejmij</th>
                   <th><spam style="color:green;">Dodaj</span></th>
                   <th><spam style="color:#3b7fed;">Szczegóły</span></th>
@@ -210,6 +221,9 @@ function wyswietlTowar($wyszukiwarka = null) {
                 
                 <td> '.$r['ilosc_usunietych'].' </td>
                 ';
+                $wylicz_cene = $r['cena'] * $r['ilosc'];
+                echo '<td> <strong>'.$wylicz_cene.' zł </strong> ('.$r['cena'].' zł/szt)</td>
+                ';
                  if($r['ilosc'] <= 0)
                     echo '<td> </td>';
                 else
@@ -228,6 +242,7 @@ function wyswietlTowar($wyszukiwarka = null) {
                 $ilosc_stan += $r['ilosc'];
                 $ilosc_ogolna += $r['ilosc_ogolna'];
                 $ilosc_usunietych += $r['ilosc_usunietych'];
+                $wartosc_towaru += $r['cena'] * $r['ilosc'];
             }
             $strata = $ilosc_ogolna - ($ilosc_stan + $ilosc_usunietych);
             echo '
@@ -237,6 +252,7 @@ function wyswietlTowar($wyszukiwarka = null) {
                 <td><strong>'.$ilosc_stan.' szt.</strong></td>
                 <td><strong>'.$ilosc_ogolna.' szt.</strong></td>
                 <td><strong>'.$ilosc_usunietych.' szt.</strong></td>
+                <td><strong> Wartość towaru: '.$wartosc_towaru.' zł</strong></td>
                 <td><strong> </strong></td>
                 <td><strong> </strong></td>
                 <td><strong> </strong></td>

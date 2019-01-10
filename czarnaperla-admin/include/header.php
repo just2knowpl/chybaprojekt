@@ -20,6 +20,9 @@
     <li class="nav-item">
         <a class="nav-link" href="lista-towarow">Zobacz wszystkie towary</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="lista-towarow">Raporty</a>
+    </li>
       </ul>
        <div class="dropdown">
         <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-bell fa-lg"></i> <span style="display: <?php if(!licznikPowiadomien()) echo 'none'; else echo 'block'; ?>" class="button__badge"><?php licznikPowiadomien() ?></span></button>
@@ -28,8 +31,8 @@
         </div>
         </div>
         
-   
     <a href="panel-konfiguracyjny"><button class="btn btn-outline-success my-2 my-sm-0" type="button">Panel konfiguracyjny</button></a>
+
   </div>
 </nav>
      

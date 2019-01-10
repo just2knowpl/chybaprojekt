@@ -67,16 +67,20 @@
         wypiszRodzajeSelect(null); ?>
     </select>
   </div>
+    <div class="form-group" style="display:<?php if(isset($_SESSION['edit'])) echo "none"; else echo "block"; ?>">
+    <label for="exampleFormControlInput1">Cena (za sztuke)</label>
+    <input type="text" class="form-control" name="cena" placeholder="Cena za 1 sztuke" required>
+  </div>
   <div class="form-group">
     <label for="exampleFormControlInput1">Ilość</label>
-    <input type="text" class="form-control" name="ilosc" placeholder="Ilość towaru" required>
+    <input type="text" class="form-control" name="ilosc" placeholder="Ilość towaru" <?php if(!isset($_SESSION['edit'])) echo "required"; ?>>
   </div>
   <button type="submit" name='dodaj' class="btn btn-primary mb-2">Dodaj towar</button>
 </form>
         <?php
         wyczyscDaneEdycji();
            if(isset($_POST['dodaj'])) {
-                addTowar(setRodzaj($_POST['rodzaj']),setFirma($_POST['firma']),setIlosc($_POST['ilosc']));
+                addTowar(setRodzaj($_POST['rodzaj']),setFirma($_POST['firma']),setIlosc($_POST['ilosc']),setCena($_POST['cena']));
                
            }
            ?>

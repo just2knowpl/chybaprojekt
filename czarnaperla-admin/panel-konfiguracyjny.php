@@ -50,6 +50,13 @@ include 'mediator/powiadomienia-mediator.php';
     <a href="wyslij-powiadomienie" class="btn btn-primary">Przejdź</a>
   </div>
 </div>
+         <div class="card text-center">
+  <div class="card-body">
+    <h5 class="card-title"><strong>Napraw dane - ceny</strong></h5>
+    <p class="card-text">Narzędzie automatyczne. Naprawianie danych przy cenie związanych z napisem "null"</p>
+    <a href="skrypty/ilosc-naprawa.php" class="btn btn-primary">Użyj</a>
+  </div>
+</div>
 
         
     </body>
