@@ -1,5 +1,5 @@
 <?php
-include 'mediator/general-mediator.php';
+include 'mediator/towar-mediator.php';
 
 $id = $_GET['id'];
 
@@ -28,14 +28,20 @@ $aktualna_cena = $r['cena'];
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     </head>
     <body>
-    <p>Aktualna cena: </p><?php $aktualna_cena ?>
+    <p>Aktualna cena: <?php echo "<strong>".$aktualna_cena." zł</strong>"; ?></p>
 <form action="" method="post">
     <div class="form-group">
     <label for="exampleFormControlInput1">Zmiana ceny towaru za sztukę</label>
-    <input type="text" class="form-control" name="ilosc" placeholder="Nowa cena" <?php if(!isset($_SESSION['edit'])) echo "required"; ?>>
+    <input type="text" class="form-control" name="nowa_ilosc" placeholder="Nowa cena" <?php if(!isset($_SESSION['edit'])) echo "required"; ?>>
     </div>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Wyjdź</button>
-        <button type="button" name="usun_zapisz" class="btn btn-primary" onClick="przejdz(getElementById('ilosc_do_usuniecia').value)">Zmień</button>
+    <a href="lista-towarow"><button type="button" class="btn btn-secondary" data-dismiss="modal" >Wyjdź</button></a>
+        <input type="submit" name="zmien_cene" class="btn btn-primary" value="Zmień">
 </form>
+   <?php
+        if(isset($_POST['zmien_cene'])) {
+            zmianaCenyTowaru(setNowaCenaTowaru($_POST['nowa_ilosc'],$id),$id); 
+        }
+        ?>
+    <h2>Historia zmian towaru "."</h2>
     </body>
 </html>

@@ -40,6 +40,22 @@ function setIlosc($ilosc) {
     echo "Błędna ilość.";
     return null;
 }
+function setNowaCenaTowaru($cena,$id) {
+    if(isset($cena)) {
+        $spr_cen = mysqli_query(dbConn(),"SELECT * FROM towar WHERE id = ".$id);
+        if(mysqli_num_rows($spr_cen) > 0) {
+            $r = mysqli_fetch_assoc($spr_cen);
+            if($r != $cena)
+                return round(mysqli_real_escape_string(dbConn(),str_replace(",",".",$cena)),2);
+            else
+                echo "Podałeś taką samą cenę.";
+        }
+    }
+    else {
+        echo "Pole 'nowa cena' nie może pozostać puste.";
+        return null;
+    }
+}
 
 function rodzajTranslate($rodzaj) {
     $translateRodzajQuery = mysqli_query(dbConn(),"SELECT * FROM rodzaje WHERE value='".$rodzaj."'");
@@ -168,12 +184,19 @@ function addTowar($rodzaj, $producent, $ilosc, $cena) {
          }
         else {
         mysqli_query(dbConn(),"INSERT INTO towar (rodzaj,firma,ilosc,ilosc_ogolna,cena) VALUES ('".$rodzaj."','".$producent."','".$ilosc."','".$ilosc."','".$cena."')"); 
+        mysqli_query(dbConn(),"INSERT INTO historia (data,firma,rodzaj,czynnosc) VALUES ('".
+                     $date = date('Y-m-d');."','".$producent."','".$ilosc."','".$ilosc."')"); 
         }
     }
     exit(header("Location: lista-towarow"));
 }
 
-
+function zmianaCenyTowaru($nowa_cena,$id) {
+    if($nowa_cena != null) {
+        mysqli_query(dbConn(),"UPDATE towar SET cena='".$nowa_cena."' WHERE id=".$id);
+        echo "Zmieniono cene";
+    }
+}
 
 //wyswietlanie wyników
 

@@ -20,9 +20,15 @@
     <li class="nav-item">
         <a class="nav-link" href="lista-towarow">Zobacz wszystkie towary</a>
     </li>
-    <li class="nav-item">
+    <div class="dropdown">
+  <button class="btn btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Inne
+  </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="nav-link" href="statystyka">Statystyki</a>
         <a class="nav-link" href="lista-towarow">Raporty</a>
-    </li>
+      </div>
+    </div>
       </ul>
        <div class="dropdown">
         <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-bell fa-lg"></i> <span style="display: <?php if(!licznikPowiadomien()) echo 'none'; else echo 'block'; ?>" class="button__badge"><?php licznikPowiadomien() ?></span></button>
