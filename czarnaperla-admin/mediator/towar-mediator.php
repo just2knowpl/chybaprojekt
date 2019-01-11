@@ -184,8 +184,8 @@ function addTowar($rodzaj, $producent, $ilosc, $cena) {
          }
         else {
         mysqli_query(dbConn(),"INSERT INTO towar (rodzaj,firma,ilosc,ilosc_ogolna,cena) VALUES ('".$rodzaj."','".$producent."','".$ilosc."','".$ilosc."','".$cena."')"); 
-        mysqli_query(dbConn(),"INSERT INTO historia (data,firma,rodzaj,czynnosc) VALUES ('".
-                     $date = date('Y-m-d');."','".$producent."','".$ilosc."','".$ilosc."')"); 
+//        mysqli_query(dbConn(),"INSERT INTO historia (data,firma,rodzaj,czynnosc) VALUES ('".
+//                     $date = date('Y-m-d');."','".$producent."','".$ilosc."','".$ilosc."')"); 
         }
     }
     exit(header("Location: lista-towarow"));
