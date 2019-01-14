@@ -60,7 +60,8 @@ function dodajPowiadomienie() {
 //Wywoływanie powiadomień
 
 function executeMaloTowaruNaStanie($firma,$towar,$ilosc) {
-    $tresc = "Wykryto małą ilość towaru '".$firma." - ".$towar."(".$ilosc.")' na magazynie.";
+    echo "<script>console.log('test');</script>";
+    $tresc = "Wykryto małą ilość towaru ".$firma." - ".$towar."(".$ilosc.") na magazynie.";
     mysqli_query(dbConn(),"INSERT INTO powiadomienia (typ,tresc) VALUES ('1','".$tresc."')");
 }
 

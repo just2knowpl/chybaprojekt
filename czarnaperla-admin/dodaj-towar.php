@@ -69,7 +69,7 @@
   </div>
     <div class="form-group" style="display:<?php if(isset($_SESSION['edit'])) echo "none"; else echo "block"; ?>">
     <label for="exampleFormControlInput1">Cena (za sztuke)</label>
-    <input type="text" class="form-control" name="cena" placeholder="Cena za 1 sztuke" required>
+    <input type="text" class="form-control" name="cena" placeholder="Cena za 1 sztuke" <?php if(!isset($_SESSION['edit'])) echo "required"; ?>>
   </div>
   <div class="form-group">
     <label for="exampleFormControlInput1">Ilość</label>

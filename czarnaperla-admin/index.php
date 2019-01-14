@@ -25,6 +25,10 @@ include 'mediator/powiadomienia-mediator.php';
     <?php include 'include/header.php' ?>
     <!--Navbar end -->
 
+    
+       <?php
+            //executeMaloTowaruNaStanie('test','test2',3);
+        ?>
         
     </body>
     

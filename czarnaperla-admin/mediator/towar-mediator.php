@@ -1,6 +1,6 @@
 <?php
-include 'general-mediator.php';
-include 'powiadomienia-mediator.php';
+require 'general-mediator.php';
+require 'powiadomienia-mediator.php';
 
 //Dodawanie towaru.
 
@@ -172,7 +172,7 @@ function changeChars($echo) {
 //funkcja wykonawcza
 
 function addTowar($rodzaj, $producent, $ilosc, $cena) {
-    if($rodzaj != null && $producent != null && $ilosc != null && $cena) {
+    if($rodzaj != null && $producent != null && $ilosc != null) {
         $check_sql = mysqli_query(dbConn(),"SELECT * FROM towar WHERE rodzaj = '".$rodzaj."' AND firma = '".$producent."'");
          if(mysqli_num_rows($check_sql) > 0) {
              $nowa_ilosc;

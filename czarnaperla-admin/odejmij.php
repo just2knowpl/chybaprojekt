@@ -23,7 +23,7 @@ if(mysqli_num_rows($zap) > 0) {
     //@TODO
     //Zrobić parametr dla progu ilosci
     if($ilosc < 3) 
-    executeMaloTowaruNaStanie($firma,$rodzaj,$ilosc);
+        executeMaloTowaruNaStanie($firma,$rodzaj,$ilosc);
         //mysqli_query(dbConn(),"UPDATE towar SET ilosc_usunietych = ".$ilosc_usunietych." WHERE id=".$id);
 }
 
