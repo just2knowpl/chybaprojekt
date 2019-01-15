@@ -27,12 +27,14 @@
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="nav-link" href="statystyka">Statystyki</a>
         <a class="nav-link" href="lista-towarow">Raporty</a>
+        <a class="nav-link" href="dostawy">Dostawy</a>
+        <a class="nav-link" href="historia">Historia zmian</a>
       </div>
     </div>
       </ul>
        <div class="dropdown">
         <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-bell fa-lg"></i> <span style="display: <?php if(!licznikPowiadomien()) echo 'none'; else echo 'block'; ?>" class="button__badge"><?php licznikPowiadomien() ?></span></button>
-          <div class="dropdown-menu p-4 text-muted" style="max-width: 250px;">
+          <div class="dropdown-menu p-4 text-muted" style="max-width: 300px;">
         <?php showPowiadomienia(); ?>
         </div>
         </div>

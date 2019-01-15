@@ -183,9 +183,9 @@ function addTowar($rodzaj, $producent, $ilosc, $cena) {
                 mysqli_query(dbConn(),"UPDATE towar SET ilosc_ogolna = '".$nowa_ilosc_ogolna."' WHERE rodzaj = '".$rodzaj."' AND firma = '".$producent."'");
          }
         else {
-        mysqli_query(dbConn(),"INSERT INTO towar (rodzaj,firma,ilosc,ilosc_ogolna,cena) VALUES ('".$rodzaj."','".$producent."','".$ilosc."','".$ilosc."','".$cena."')"); 
-//        mysqli_query(dbConn(),"INSERT INTO historia (data,firma,rodzaj,czynnosc) VALUES ('".
-//                     $date = date('Y-m-d');."','".$producent."','".$ilosc."','".$ilosc."')"); 
+        mysqli_query(dbConn(),"INSERT INTO towar (rodzaj,firma,ilosc,ilosc_ogolna,cena) VALUES ('".$rodzaj."','".$producent."','".$ilosc."','".$ilosc."','".round(str_replace(',','.',$cena),2)."')"); 
+//        mysqli_query(dbConn(),"INSERT INTO historia (data,firma,rodzaj,czynnosc) VALUES ('".$date = date('Y-m-d H:i:s')."', '".$producent."', '".$rodzaj."', 'Dodanie towaru w ilosci ".$ilosc."')"); 
+        dodajHistorie($producent,$rodzaj,$ilosc,round(str_replace(',','.',$cena),2),'dodaj');
         }
     }
     exit(header("Location: lista-towarow"));
@@ -383,6 +383,72 @@ function wyszukiwanieTowaru($fraza) {
     return mysqli_query(dbConn(),"SELECT * FROM towar WHERE rodzaj LIKE '%".$fraza."%' OR firma LIKE '%".$fraza."%'");
 }
 
+function wypiszHistorie($firma,$rodzaj) {
+    if($firma != null && $rodzaj != null)
+        $sql = mysqli_query(dbConn(),"SELECT * FROM historia WHERE rodzaj = '".$rodzaj."' AND firma = '".$firma."' ORDER BY id DESC");
+    else
+        $sql = mysqli_query(dbConn(),"SELECT * FROM historia ORDER BY id DESC");
+    if(mysqli_num_rows($sql) > 0) {
+        echo '
+        
+        <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Data</th>
+          <th scope="col">Firma</th>
+          <th scope="col">Rodzaj</th>
+          <th scope="col">Opis</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        ';
+        while($r = mysqli_fetch_assoc($sql)) {
+        echo '
+    <tr>
+      <td>'.$r['data'].'</td>
+      <td>'.$r['firma'].'</td>
+      <td>'.$r['rodzaj'].'</td>
+      <td>'.$r['czynnosc'].'</td>
+    </tr>
+
+        
+        ';
+    }
+        echo '  
+        </tbody>
+        </table>';
+    }
+    else {
+        echo "Brak historii zmian.";
+    }
+}
+
+function dodajHistorie($producent,$rodzaj,$wartosc,$wartosc2,$typ) {
+     $tresc;
+    switch($typ) {
+        case 'dodaj':
+            $tresc = "Dodanie towaru w ilosci ".$wartosc." w kwocie ".$wartosc2." zł za sztukę"; 
+            break;
+        case 'usun':
+            $tresc = "Usunięcie towaru w ilosci ".$wartosc; 
+            break;    
+        case 'zmiana_ceny':
+            $tresc = "Zmieniono cene towaru z ".$wartosc." na ".$wartosc2; 
+            break;
+        case 'dodanie_towaru':
+            $tresc;
+            break;
+        case 'dodanie_firmy':
+            $tresc;
+            break;
+        case 'dodanie_rodzaju':
+            $tresc;
+            break;
+    }
+     mysqli_query(dbConn(),"INSERT INTO historia (data,firma,rodzaj,czynnosc) VALUES ('".$date = date('Y-m-d H:i:s')."', '".$producent."', '".$rodzaj."', '".$tresc."')");
+    
+}
 ?>
 
 

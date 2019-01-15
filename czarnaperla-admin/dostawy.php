@@ -1,12 +1,11 @@
 <?php
 include 'mediator/general-mediator.php';
 include 'mediator/powiadomienia-mediator.php';
-include 'mediator/dostawy-mediator.php';
 ?>
 <!DOCTYPE html>
 <html>
     <head lang="pl">
-        <title>Statystyka - Czarna Perła</title>
+        <title>Panel administracyjny - Czarna Perła</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/style.css">
         <meta http-equiv="X-Ua-Compatible" content="IE=edge,chrome=1">
@@ -25,45 +24,37 @@ include 'mediator/dostawy-mediator.php';
     <!-- navbar start -->
     <?php include 'include/header.php' ?>
     <!--Navbar end -->
-<h1>Statystyki ogólne sklepu</h1>
-    <!--    tabelka z poszczególnymi miesiącami.-->
+    
+    <h1>Menadżer dostaw</h1>
+    
+    <h2>Najbliższa dostawa za: x dni</h2>
+    
+    <form>
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="forma_dostawa">Firma dostarczająca</label>
+      <input type="text" class="form-control" id="firma_dostawa" placeholder="Nazwa firmy" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="cena_dostawa">Cena dostawy</label>
+      <input type="number" class="form-control" id="cena_dostawa" placeholder="Cena dostawy" required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="data_dostawa">Data</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend3"><i class="far fa-calendar"></i></span>
+        </div>
+        <input type="date" class="form-control" id="data_dostawa" aria-describedby="data_dostawa" required>
+      </div>
+    </div>
+  </div>
   
-  <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-
-   
-<!--   Koniec tabelki-->
-      
+  <button class="btn btn-primary" type="submit">Wyślij</button>
+</form>
+    
        <?php
-            
+
         ?>
         
     </body>

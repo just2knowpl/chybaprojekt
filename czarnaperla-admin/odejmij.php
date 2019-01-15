@@ -1,7 +1,6 @@
 <?php
 
-include 'mediator/general-mediator.php';
-include 'mediator/powiadomienia-mediator.php';
+include 'mediator/towar-mediator.php';
 
 $id = $_GET['id'];
 $il = $_GET['ilosc'];
@@ -24,6 +23,7 @@ if(mysqli_num_rows($zap) > 0) {
     //Zrobić parametr dla progu ilosci
     if($ilosc < 3) 
         executeMaloTowaruNaStanie($firma,$rodzaj,$ilosc);
+    dodajHistorie($firma,$rodzaj,$il,null,'usun');
         //mysqli_query(dbConn(),"UPDATE towar SET ilosc_usunietych = ".$ilosc_usunietych." WHERE id=".$id);
 }
 
