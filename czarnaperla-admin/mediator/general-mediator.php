@@ -10,6 +10,8 @@ function dbConn() {
     $dbpass = "";
     $db = "czarna-perla";
     $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $db);
+	mysqli_select_db($conn,$db);
+	mysqli_set_charset($conn,'utf8');
     if($conn) {
         return $conn;
     }
